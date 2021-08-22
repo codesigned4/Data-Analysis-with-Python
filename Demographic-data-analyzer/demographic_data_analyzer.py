@@ -31,13 +31,14 @@ def calculate_demographic_data(print_data=True):
     lower_education =((df["education"].count()-df[(df["education"]=="Bachelors")|(df["education"]=="Masters")|(df["education"]=="Doctorate")]["age"].count())/df["education"].count())*100
 
     # percentage with salary >50K
-    withFloat3=((df[((df["education"]=="Bachelors")|(df["education"]=="Masters")|(df["education"]=="Doctorate"))&(df["salary"]==">50K")]["age"]).count()/(df[(df["salary"]==">50K")].count()["age"]))*100
-    higher_education_rich = float(f"{withFloat3:.1f}")
-    
-    withFloat4=((df[((df["education"]).count()-(((df["education"]=="Bachelors")|(df[
-      "education"]=="Masters")|(df["education"]=="Doctorate")))).count()&(df["salary"]==">50K")])["age"].count()/df["education"].count())*100
-    
-    lower_education_rich =float(f"{withFloat4:.1f}")
+
+    higher_education_rich = round(len(df[df["education"].isin(["Bachelors", "Masters", "Doctorate"])][df[df[
+        "education"].isin(["Bachelors", "Masters", "Doctorate"])].salary == ">50K"]) / len(
+        df[df["education"].isin(["Bachelors", "Masters", "Doctorate"])]) * 100, 1)
+
+    lower_education_rich = round((len(df[~df["education"].isin(["Bachelors", "Masters", "Doctorate"])][df[~df[
+        "education"].isin(["Bachelors", "Masters", "Doctorate"])].salary == ">50K"])) / len(
+        df[~df["education"].isin(["Bachelors", "Masters", "Doctorate"])]) * 100, 1)
 
     # What is the minimum number of hours a person works per week (hours-per-week )?
     min_work_hours = df["hours-per-week"].min()
