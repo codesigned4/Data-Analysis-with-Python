@@ -15,7 +15,7 @@ def draw_plot():
    slope, intercept, r, p, se = linregress(yearData, AdjustedSeaLevel)
    #plt.plot(yearData, AdjustedSeaLevel, 'o', label='original data')
   
-   plt.plot(np.linspace(1880,2050,171), intercept + slope*np.linspace(1880,2050,171), 'r', label='fitted line')
+   plt.plot(np.linspace(1880,2050,170), intercept + slope*np.linspace(1880,2050,170), 'r', label='fitted line')
    
     # Create second line of best fit
    df_2000 = df[df['Year'] >= 2000]
